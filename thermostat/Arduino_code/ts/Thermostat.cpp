@@ -5,30 +5,20 @@
 #include "Arduino.h"
 #include "Thermostat.h"
 
-Thermostat::Thermostat(int cooling_pin, int heating_pin, int temp_pin_1, int temp_pin_2 = 0,
-                       int thermistor_R=49900, float nominal_t=18, float coef_thermistor=269, int serial_R=10000,
-                       int B_coef=3950) {
+Thermostat::Thermostat(int cooling_pin, int heating_pin, int fans_pin_1, int fans_pin_2) {
     pinMode(cooling_pin, OUTPUT);
     pinMode(heating_pin, OUTPUT);
-    pinMode(temp_pin_1, INPUT);
+    pinMode(fans_pin_1, OUTPUT);
+    pinMode(fans_pin_2, OUTPUT);
 
-    if (temp_pin_2) pinMode(temp_pin_2, INPUT);
 
     _cooling_pin = cooling_pin;
     _heating_pin = heating_pin;
-    _temp_pin_1 = temp_pin_1;
-    _temp_pin_2 = temp_pin_2;
-
-    // Const for calculate temperature into thermistor
-    _thermistor_R = thermistor_R;
-    _nominal_t = nominal_t;
-    _coef_thermistor = coef_thermistor;
-    _serial_R = serial_R;
-    _B_coef = B_coef;
-
+    _fans_pin_1 = fans_pin_1;
+    _fans_pin_2 = fans_pin_2;
 }
 
-void Thermostat::_fans_manage() {
+void Thermostat::_fans_manage(bool on, int time_after_off) {
 
 }
 
